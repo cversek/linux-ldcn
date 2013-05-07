@@ -11,8 +11,8 @@ import sys, time
 from ctypes import *
 
 #module constants
-SERIAL_PORT = "/dev/ttyUSB0"
-BAUDRATE    = 19200
+SERIAL_PORT = "/dev/ttyUSB2"
+BAUDRATE    = 9600
 
 #Ldcn Constants
 STEPMODTYPE     = 3
