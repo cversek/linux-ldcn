@@ -88,16 +88,17 @@ handle SioOpen(char *port, long baudrate) {
   tcgetattr(fd,&Old_TIO); //save current port settings
 
   memset(&Current_TIO, '\0', sizeof(struct termios));
-  Current_TIO.c_cflag = baudrate_cflag | CS8 | CLOCAL | CREAD;
   Current_TIO.c_cflag &= ~(CSIZE | PARENB);
+  Current_TIO.c_cflag = baudrate_cflag | CS8 | CLOCAL | CREAD;
+  
   Current_TIO.c_iflag = IGNPAR;
   Current_TIO.c_oflag = 0;
 
   //set input mode (non-canonical, no echo,...)
   Current_TIO.c_lflag = 0;
 
-  Current_TIO.c_cc[VTIME]     = 10;
-  Current_TIO.c_cc[VMIN]      = 0;
+  Current_TIO.c_cc[VTIME]     = 0;//10;
+  Current_TIO.c_cc[VMIN]      = 1;//0;
 
   // Finally, apply the configuration
   //tcflush(fd, TCIFLUSH);
